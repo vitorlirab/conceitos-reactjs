@@ -16,7 +16,7 @@ function App() {
   async function handleAddRepository(e) {
     e.preventDefault();
     const techsArray = techs.split(',').map(tech => tech.trim());
-   
+
     await api.post('repositories', {
       title,
       url,
@@ -24,9 +24,6 @@ function App() {
     });
     const repos = await api.get('repositories');
     setRepositories(repos.data)
-    setTitle('');
-    setUrl('');
-    setTechs('');
   }
 
   async function handleRemoveRepository(id) {
@@ -36,21 +33,20 @@ function App() {
 
   return (
     <div>
-
       <ul data-testid="repository-list">
         {repositories.map(repository => (
           <li key={repository.id}>
-
             {repository.title}
-
             <button type="button" onClick={() => handleRemoveRepository(repository.id)}>
               Remover
-          </button>
+            </button>
           </li>
         ))}
       </ul>
       <input
         type="text"
+        name="title"
+        id="title"
         placeholder="Title"
         value={title}
         onChange={e => setTitle(e.target.value)}
