@@ -17,13 +17,14 @@ function App() {
     e.preventDefault();
     const techsArray = techs.split(',').map(tech => tech.trim());
 
-    await api.post('repositories', {
+    const response = await api.post('repositories', {
       title,
       url,
       techs: techsArray
     });
-    const repos = await api.get('repositories');
-    setRepositories(repos.data)
+
+    const repository = response.data;
+    setRepositories([...repositories, repository])
   }
 
   async function handleRemoveRepository(id) {
@@ -37,7 +38,7 @@ function App() {
         {repositories.map(repository => (
           <li key={repository.id}>
             {repository.title}
-            <button type="button" onClick={() => handleRemoveRepository(repository.id)}>
+            <button onClick={() => handleRemoveRepository(repository.id)}>
               Remover
             </button>
           </li>
@@ -63,7 +64,7 @@ function App() {
         value={techs}
         onChange={e => setTechs(e.target.value)}
       />
-      <button type="submit" onClick={handleAddRepository}>Adicionar</button>
+      <button onClick={handleAddRepository}>Adicionar</button>
 
     </div>
   );
