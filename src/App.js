@@ -34,28 +34,7 @@ function App() {
 
   return (
     <div>
-      <div className="input-group">
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Url"
-          value={url}
-          onChange={e => setUrl(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Techs"
-          value={techs}
-          onChange={e => setTechs(e.target.value)}
-        />
-      </div>
 
-      <button type="button" onClick={handleAddRepository}>Adicionar</button>
       <ul data-testid="repository-list">
         {repositories.map(repository => (
           <li key={repository.id}>
@@ -68,7 +47,25 @@ function App() {
           </li>
         ))}
       </ul>
-
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={e => setTitle(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Url"
+        value={url}
+        onChange={e => setUrl(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Techs"
+        value={techs}
+        onChange={e => setTechs(e.target.value)}
+      />
+      <button type="button" onClick={handleAddRepository}>Adicionar</button>
 
     </div>
   );
