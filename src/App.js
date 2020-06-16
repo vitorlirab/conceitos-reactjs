@@ -9,10 +9,6 @@ function App() {
   const [url, setUrl] = React.useState();
   const [techs, setTechs] = React.useState('');
 
-  React.useEffect(() => {
-    api.get('repositories').then(response => setRepositories(response.data))
-  }, []);
-
   async function handleAddRepository() {
     const techsArray = techs.split(',').map(tech => tech.trim());
     const data = {
@@ -21,10 +17,9 @@ function App() {
       techs: techsArray
     }
     await api.post('repositories', data);
-    const repos = await api.get('repositories');
-    setRepositories(repos.data)
-
-
+    const repos = await api.get('repositories')
+    setRepositories(repos.data);
+   
   }
 
   async function handleRemoveRepository(id) {
