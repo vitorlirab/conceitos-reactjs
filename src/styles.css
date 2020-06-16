@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin-top: 50px;
+  height: 100vh;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+
+}
+
+
+div li + li {
+  margin-top: 15px;
+}
+
+button {
+  background: #7159c1;
+  color: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+div li button {
+  margin: 0 15px;
+  background: #ca4949;
+}
