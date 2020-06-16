@@ -5,21 +5,28 @@ import "./styles.css";
 
 function App() {
   const [repositories, setRepositories] = React.useState([]);
-  const [title, setTitle] = React.useState();
-  const [url, setUrl] = React.useState();
+  const [title, setTitle] = React.useState('');
+  const [url, setUrl] = React.useState('');
   const [techs, setTechs] = React.useState('');
 
-  async function handleAddRepository() {
+  React.useEffect(() => {
+    api.get('repositories').then(response => setRepositories(response.data))
+  }, []);
+
+  async function handleAddRepository(e) {
+    e.preventDefault();
     const techsArray = techs.split(',').map(tech => tech.trim());
-    const data = {
+   
+    await api.post('repositories', {
       title,
       url,
       techs: techsArray
-    }
-    await api.post('repositories', data);
-    const repos = await api.get('repositories')
-    setRepositories(repos.data);
-   
+    });
+    const repos = await api.get('repositories');
+    setRepositories(repos.data)
+    setTitle('');
+    setUrl('');
+    setTechs('');
   }
 
   async function handleRemoveRepository(id) {
@@ -60,7 +67,7 @@ function App() {
         value={techs}
         onChange={e => setTechs(e.target.value)}
       />
-      <button type="button" onClick={handleAddRepository}>Adicionar</button>
+      <button type="submit" onClick={handleAddRepository}>Adicionar</button>
 
     </div>
   );
